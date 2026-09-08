@@ -101,6 +101,14 @@
 	claude-code
 	curl
 	bat
+	vscode
+	jq
+	fzf
+	zellij
+	tree
+	google-chrome
+	lazygit
+	zoxide
 	lazydocker
 	btop	
 	wget
