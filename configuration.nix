@@ -96,6 +96,9 @@
   # You can use https://search.nixos.org/ to find more packages (and options).
    environment.systemPackages = with pkgs; [
 	vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  	python3
+  	python3Packages.pip
+  	go
 	localsend
 	gh
 	claude-code
@@ -108,6 +111,9 @@
 	tree
 	google-chrome
 	lazygit
+	obsidian
+	libreoffice
+	file
 	zoxide
 	lazydocker
 	btop	
@@ -115,12 +121,14 @@
 	tldr
 	vim
  	unzip
+	zip
 	gcc
 	gnumake
 	git
 	zed-editor
 	eza
  	starship
+	pandoc
         nerd-fonts.jetbrains-mono
   ];
 
@@ -138,6 +146,8 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
+  networking.firewall.allowedTCPPorts = [ 53317 ];
+  networking.firewall.allowedUDPPorts = [ 53317 ];
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
