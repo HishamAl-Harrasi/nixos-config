@@ -10,12 +10,29 @@
       ./hardware-configuration.nix
     ];
 
+  # Bluetooth configs
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;   # turn on the adapter at boot
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true;  # needed for battery %, some newer features
+      };
+    };
+  };
+  services.blueman.enable = true;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  networking.extraHosts = ''
+    127.0.0.1 myhost.local    
+  '';
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -110,6 +127,8 @@
 	zellij
 	tree
 	google-chrome
+	arandr
+	discord
 	lazygit
 	obsidian
 	libreoffice
@@ -123,6 +142,7 @@
  	unzip
 	zip
 	gcc
+	pciutils
 	gnumake
 	git
 	zed-editor
