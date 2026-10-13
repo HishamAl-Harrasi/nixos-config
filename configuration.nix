@@ -116,7 +116,10 @@
   	python3
   	python3Packages.pip
   	go
+	nodejs # provides node, npm and npx
 	localsend
+	prismlauncher # Minecraft launcher (bundles JDKs + Minecraft-patched GLFW)
+	cloudflared
 	gh
 	claude-code
 	curl
@@ -129,12 +132,19 @@
 	google-chrome
 	arandr
 	discord
+	rclone
 	lazygit
+	codex
 	obsidian
+	beekeeper-studio
 	libreoffice
+	imagemagick
+	libheif
 	file
 	zoxide
+	bun
 	lazydocker
+	anydesk
 	btop	
 	wget
 	tldr
@@ -150,6 +160,7 @@
  	starship
 	pandoc
         nerd-fonts.jetbrains-mono
+	(callPackage ./orca.nix { })
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -197,9 +208,20 @@
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "26.05"; # Did you read the comment?
 
+  # npm's default global prefix is the nodejs store path, which is read-only,
+  # so `npm install -g` fails. Point global installs at the user's home and put
+  # the resulting binaries on PATH.
+  environment.sessionVariables = {
+    NPM_CONFIG_PREFIX = "$HOME/.npm-global";
+    PATH = [ "$HOME/.npm-global/bin" ];
+  };
+
   # Hisham Configs
   nixpkgs.config.allowUnfree = true;
   virtualisation.docker.enable = true;
   programs.fish.enable = true;  
+  programs.fuse.userAllowOther = true;
 
+  services.pcscd.enable = true;
+  services.pcscd.plugins = [ pkgs.ccid ];
 }
