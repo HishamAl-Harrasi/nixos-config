@@ -133,6 +133,7 @@
 	arandr
 	discord
 	rclone
+	mpv
 	lazygit
 	codex
 	obsidian
@@ -143,6 +144,7 @@
 	file
 	zoxide
 	bun
+	openssl
 	lazydocker
 	anydesk
 	btop	
